@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="studentNamespace">
+	
+	<resultMap type="cn.itcast.javaee.mybatis.many2many.Student" id="studentMap">
+		<id property="id" column="sid"/>
+		<result property="name" column="sname"/>
+	</resultMap>	
+
+	
+	<select id="findAllByCourseName" parameterType="string" resultMap="studentMap">
+		select s.sname
+		from students s inner join middles m
+		on s.sid = m.msid 
+		inner join courses c
+		on m.mcid = c.cid
+		and c.cname = #{name}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+

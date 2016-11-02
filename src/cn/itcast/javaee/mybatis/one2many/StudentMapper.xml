@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="studentNamespace">
+	
+	<resultMap type="cn.itcast.javaee.mybatis.one2many.Student" id="studentMap">
+		<id property="id" column="sid"/>
+		<result property="name" column="sname"/>
+	</resultMap>	
+	
+	
+	<!-- 查询java学科有哪些学生信息 -->
+	<select id="findAllByName" parameterType="string" resultMap="studentMap">
+		select s.sid,s.sname
+		from students s inner join grades g
+		on s.sgid = g.gid
+		and g.gname = #{namexxxxxxxxxxxxxxxx}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+

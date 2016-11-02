@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="studentNamespace">
+	
+	<resultMap type="cn.itcast.javaee.mybatis.one2one.Student" id="studentMap">
+		<id property="id" column="sid"/>
+		<result property="name" column="sname"/>
+		<!-- 引入CardMapper.xml文件中的映射信息 
+			 property表示Student类的关联属性
+			 resultMap表示引入CardMapper.xml文件的映射类型
+		-->
+		<association property="card" resultMap="cardNamespace.cardMap"/>
+	</resultMap>	
+	
+	
+	
+	
+	<!-- 查询1号学生的信息 -->
+	<select id="findById" parameterType="int" resultMap="studentMap">
+		select s.sid,s.sname,c.cid,c.cnum
+		from students s inner join cards c
+		on s.scid = c.cid 		
+		and s.sid = #{id}
+	</select>
+	
+	
+	<!-- 查询哈哈学生的信息 -->
+	<select id="findByName" parameterType="string" resultMap="studentMap">
+		select s.sname,c.cnum
+		from students s inner join cards c
+		on s.scid = c.cid 		
+		and s.sname = #{name}
+	</select>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
